@@ -24,6 +24,9 @@
           # Hardware detection
           ./hosts/hardware-configuration.nix
 
+          # Components selection
+          ./hosts/components.nix
+
           # Core system modules
           ./modules/system/basic-packages.nix
           ./modules/system/networking.nix
