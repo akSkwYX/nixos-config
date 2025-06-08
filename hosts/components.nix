@@ -22,6 +22,9 @@
     components.desktop.evince.enable = lib.mkEnableOption "Enable evince";
     components.desktop.gwenview.enable = lib.mkEnableOption "Enable gwenview";
 
+    # Browser
+    components.desktop.zen.enable = lib.mkEnableOption "Enable zen browser";
+
     # Other
     components.desktop.anki.enable = lib.mkEnableOption "Enable Anki";
     components.desktop._1password.enable = lib.mkEnableOption "Enable 1password";
@@ -74,6 +77,9 @@
     # Document viewer
     components.desktop.evince.enable = true;
     components.desktop.gwenview.enable = true;
+
+    # Browser
+    components.desktop.zen.enable = true;
 
     # Other
     components.desktop.anki.enable = true;
