@@ -1,19 +1,19 @@
 { config, pkgs, lib, ... }:
 {
-  imports = []
+  imports = [
     # Commands
-    ++ lib.optional config.components.dev.commands.tealdeer.enable ./tealdeer.nix
+    ./tealdeer.nix
 
     # Langage support
-    ++ lib.optional config.components.dev.langage.c.enable ./c.nix
-    ++ lib.optional config.components.dev.langage.css.enable ./css.nix
-    ++ lib.optional config.components.dev.langage.haskell.enable ./haskell.nix
-    ++ lib.optional config.components.dev.langage.latex.enable ./latex.nix
-    ++ lib.optional config.components.dev.langage.lua.enable ./lua.nix
-    ++ lib.optional config.components.dev.langage.markdown.enable ./markdown.nix
-    ++ lib.optional config.components.dev.langage.ocaml.enable ./ocaml.nix
-    ++ lib.optional config.components.dev.langage.rust.enable ./rust.nix
-  ;
+    ./langage/c.nix
+    ./langage/css.nix
+    ./langage/haskell.nix
+    ./langage/latex.nix
+    ./langage/lua.nix
+    ./langage/markdown.nix
+    ./langage/ocaml.nix
+    ./langage/rust.nix
+  ];
 
   home.packages = []
     # Commands

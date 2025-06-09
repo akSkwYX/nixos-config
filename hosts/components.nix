@@ -11,6 +11,8 @@
 
     # Just God
     components.git.enable = lib.mkEnableOption "Enable Git";
+    # Second God
+    components.nvim.enable = lib.mkEnableOption "Enable neovim configuration";
 
     # Desktop App
     # File manager
@@ -43,7 +45,7 @@
     components.dev.commands.neofetch.enable = lib.mkEnableOption "Enable neofetch";
     components.dev.commands.zip.enable = lib.mkEnableOption "Enable zip and unzip";
     components.dev.commands.hyperfine.enable = lib.mkEnableOption "Enable hyperfine";
-    componenets.dev.commands.make.enable = lib.mkEnableOption "Enable make";
+    components.dev.commands.make.enable = lib.mkEnableOption "Enable make";
 
     # Langage support
     components.dev.langage.c.enable = lib.mkEnableOption "Enable C support";
@@ -67,6 +69,8 @@
 
     # Just God
     components.git.enable = true;
+    # Second God
+    components.nvim.enable = true;
 
     # Desktop App
     # File manager
@@ -99,7 +103,7 @@
     components.dev.commands.neofetch.enable = true;
     components.dev.commands.zip.enable = true;
     components.dev.commands.hyperfine.enable = true;
-    componenets.dev.commands.make.enable = true;
+    components.dev.commands.make.enable = true;
 
     # Langage support
     components.dev.langage.c.enable = true;

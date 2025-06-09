@@ -5,6 +5,4 @@
     package = pkgs.hyprland;
     xwayland.enable = true;
   };
-  
-  nixpkgs.config.allowUnfree = true;
 }

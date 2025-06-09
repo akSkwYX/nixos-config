@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   programs.oh-my-posh = {
-    enable = true;
+    enable = config.components.term.oh-my-posh.enable;
     enableZshIntegration = true;
     useTheme = "velvet";
   };

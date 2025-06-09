@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  home.packages = [
+  home.packages = lib.mkIf config.components.dev.langage.ocaml.enable [
     pkgs.ocaml
     pkgs.dune_3
     pkgs.ocamlPackages.ocaml-lsp

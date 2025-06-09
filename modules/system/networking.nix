@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   networking.hostName = "Sk-nixos";
-  networking.networkManager.enable = true;
+  networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;
 

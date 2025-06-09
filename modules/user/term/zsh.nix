@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 {
   programs.zsh = {
-    enable = true;
+    enable = config.components.term.zsh.enable;
     enableCompletion = true;
     enableVteIntegration = true;
     autocd = true;

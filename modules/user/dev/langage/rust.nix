@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-  home.packages = [
+  home.packages = lib.mkIf config.components.dev.langage.rust.enable [
     pkgs.rustc
   ];
 }

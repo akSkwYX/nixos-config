@@ -2,29 +2,35 @@
 {
   imports = [
     ./hardware-configuration.nix
-  ];
-
-  # Choose window manager (currently only hyprland, who need something else ?)
-  hyprland.enable = true;
+  ];  
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Add experimental features
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  nixpkgs.config.allowUnfree = true;
 
   # User account
   users.users.skwyx = {
     isNormalUser = true;
     description = "SkwYX";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
+    shell = if config.components.term.zsh.enable then
+      pkgs.zsh
+    else
+      pkgs.bash
+    ;
     useDefaultShell = true;
+    ignoreShellProgramCheck = true;
   };
-
-  users.defaultUserShell = pkgs.zsh;
 
   # Initial system state version
   # Don't touch ! This will not upgrade your system if you update it 
   # instead it will break your system
   system.stateVersion = "24.11";
-
 }

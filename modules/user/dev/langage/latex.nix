@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  home.packages = [
+  home.packages = lib.mkIf config.components.dev.langage.latex.enable [
     pkgs.texliveFull
   ];
 }

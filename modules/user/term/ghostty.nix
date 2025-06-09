@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   programs.ghostty = {
-    enable = true;
+    enable = config.components.term.ghostty.enable;
     enableZshIntegration = true;
     enableBashIntegration = true;
     settings = {

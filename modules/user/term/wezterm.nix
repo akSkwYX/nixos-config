@@ -1,19 +1,21 @@
 { config, pkgs, lib, ... }:
 {
   programs.wezterm = {
-    enable = true;
+    enable = config.components.term.wezterm.enable;
     enableBashIntegration = true;
     enableZshIntegration = true;
-    extraConfig = {
-      "return {
-         font = wezterm.font(\"JetBrains Mono\"),
-         font-size = 24.0,
-         color_scheme = \"Catppuccin Mocha\",
-         hide_tab_bar_if_only_one_tab = true,
-         tab_bar_at_bottom = true,
-         use_fancy_tab_bar = true,
-         window_background_opacity = 0.8,
-       }"
-    };
+    extraConfig = "
+local config = wezterm.config_builder()
+
+config.font = wezterm.font(\"JetBrains Mono\")
+config.font_size = 14
+config.color_scheme = \"Catppuccin Mocha\"
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = true
+config.window_background_opacity = 0.8
+
+return config
+";
   };
 }

@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }:
 {
   programs._1password = {
-    enable = true;
+    enable = config.components.desktop._1password.enable;
   };
 
   programs._1password-gui = {
-    enable = true;
+    enable = config.components.desktop._1password.enable;
     polkitPolicyOwners = [ "skwyx" ];
   };
 }
