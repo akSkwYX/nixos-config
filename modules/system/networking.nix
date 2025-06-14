@@ -3,6 +3,16 @@
   networking.hostName = "Sk-nixos";
   networking.networkmanager.enable = true;
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; }
+    ];
+  };
+
   hardware.bluetooth.enable = true;
 
   time.timeZone = "Europe/Paris";

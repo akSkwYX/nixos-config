@@ -12,5 +12,6 @@
 
     # Other
     ++ lib.optional config.components.desktop.anki.enable pkgs.anki
+    ++ lib.optional config.components.desktop.kdeConnect.enable pkgs.libsForQt5.kdeconnect-kde
   ;
 }

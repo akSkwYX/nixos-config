@@ -19,7 +19,21 @@
     };
 
     shellAliases = {
-      nixosrebuild = "nixos-rebuild switch --use-remote-sudo --flake /home/skwyx/.nixos#default --update";
+      nixosrebuild = "nix flake update --flake ~/\.nixos/nixos-config && \ 
+        sudo nixos-rebuild switch --flake ~/\.nixos/nixos-config#default";
+      hyprconfig = "cd ~/.nixos/dotfiles/hypr && nvim";
+      nvimconfig = "cd ~/.nixos/dotfiles/neovim && nvim";
+      systemconfig = "cd ~/.nixos/nixos-config && nvim";
     };
+
+    initContent = ''
+      hyprtest() {
+        if [ $# -eq 0 ]; then
+          echo "Usage: hyprtest <command> [args…]" >&2
+          return 1
+        fi
+        XDG_CONFIG_HOME="$HOME/.test" "$@"
+      }
+    '';
   };
 }

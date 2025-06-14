@@ -13,6 +13,8 @@
     ./langage/markdown.nix
     ./langage/ocaml.nix
     ./langage/rust.nix
+    ./langage/java.nix
+    ./langage/python.nix
   ];
 
   home.packages = []
@@ -23,5 +25,6 @@
     ++ lib.optional config.components.dev.commands.zip.enable pkgs.unzip
     ++ lib.optional config.components.dev.commands.hyperfine.enable pkgs.hyperfine
     ++ lib.optional config.components.dev.commands.make.enable pkgs.gnumake
+    ++ lib.optional config.components.dev.commands.tree.enable pkgs.tree
   ;
 }

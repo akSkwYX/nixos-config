@@ -10,5 +10,6 @@
     home-manager
   ]
     ++ lib.optional config.components.desktop.zen.enable inputs.zen-browser.packages.${pkgs.system}.default
+    ++ lib.optional config.components.windowManager.hyprland.enable inputs.hypr-flake.quickshellpkgs
   ;
 }

@@ -30,6 +30,7 @@
     # Other
     components.desktop.anki.enable = lib.mkEnableOption "Enable Anki";
     components.desktop._1password.enable = lib.mkEnableOption "Enable 1password";
+    components.desktop.kdeConnect.enable = lib.mkEnableOption "Enable kdeConnect";
 
     # Terminal components
     components.term.wezterm.enable = lib.mkEnableOption "Enable Wezterm";
@@ -46,6 +47,7 @@
     components.dev.commands.zip.enable = lib.mkEnableOption "Enable zip and unzip";
     components.dev.commands.hyperfine.enable = lib.mkEnableOption "Enable hyperfine";
     components.dev.commands.make.enable = lib.mkEnableOption "Enable make";
+    components.dev.commands.tree.enable = lib.mkEnableOption "Enable tree";
 
     # Langage support
     components.dev.langage.c.enable = lib.mkEnableOption "Enable C support";
@@ -56,6 +58,8 @@
     components.dev.langage.markdown.enable = lib.mkEnableOption "Enable Markdown support";
     components.dev.langage.ocaml.enable = lib.mkEnableOption "Enable Ocaml support";
     components.dev.langage.rust.enable = lib.mkEnableOption "Enable Rust support";
+    components.dev.langage.java.enable = lib.mkEnableOption "Enable Java support";
+    components.dev.langage.python.enable = lib.mkEnableOption "Enable Python support";
   };
 
   config = {
@@ -88,6 +92,7 @@
     # Other
     components.desktop.anki.enable = true;
     components.desktop._1password.enable = true;
+    components.desktop.kdeConnect.enable = true;
 
     # Terminal components
     components.term.wezterm.enable = true;
@@ -104,6 +109,7 @@
     components.dev.commands.zip.enable = true;
     components.dev.commands.hyperfine.enable = true;
     components.dev.commands.make.enable = true;
+    components.dev.commands.tree.enable = true;
 
     # Langage support
     components.dev.langage.c.enable = true;
@@ -114,5 +120,7 @@
     components.dev.langage.markdown.enable = true;
     components.dev.langage.ocaml.enable = true;
     components.dev.langage.rust.enable = true;
+    components.dev.langage.java.enable = true;
+    components.dev.langage.python.enable = true;
   };
 }
