@@ -24,6 +24,7 @@
       hyprconfig = "cd ~/.nixos/dotfiles/hypr && nvim";
       nvimconfig = "cd ~/.nixos/dotfiles/neovim && nvim";
       systemconfig = "cd ~/.nixos/nixos-config && nvim";
+      quicktest = "qs -p ~/.test/quickshell";
     };
 
     initContent = ''

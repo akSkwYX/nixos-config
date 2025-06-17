@@ -34,6 +34,7 @@
         ./modules/system/basic-packages.nix
         ./modules/system/networking.nix
         ./modules/system/wm.nix
+        hypr-flake.systemModules.default
         
         # Per-host overrides
         ./hosts/default.nix

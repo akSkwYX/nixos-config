@@ -2,7 +2,7 @@
 {
   imports = [
     # Commands
-    ./tealdeer.nix
+    ./commands/tealdeer.nix
 
     # Langage support
     ./langage/c.nix
@@ -26,5 +26,6 @@
     ++ lib.optional config.components.dev.commands.hyperfine.enable pkgs.hyperfine
     ++ lib.optional config.components.dev.commands.make.enable pkgs.gnumake
     ++ lib.optional config.components.dev.commands.tree.enable pkgs.tree
+    ++ lib.optional config.components.dev.commands.xprop.enable pkgs.xorg.xprop
   ;
 }

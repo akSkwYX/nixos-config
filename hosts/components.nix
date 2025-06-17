@@ -48,6 +48,7 @@
     components.dev.commands.hyperfine.enable = lib.mkEnableOption "Enable hyperfine";
     components.dev.commands.make.enable = lib.mkEnableOption "Enable make";
     components.dev.commands.tree.enable = lib.mkEnableOption "Enable tree";
+    components.dev.commands.xprop.enable = lib.mkEnableOption "Enable xprop";
 
     # Langage support
     components.dev.langage.c.enable = lib.mkEnableOption "Enable C support";
@@ -110,6 +111,7 @@
     components.dev.commands.hyperfine.enable = true;
     components.dev.commands.make.enable = true;
     components.dev.commands.tree.enable = true;
+    components.dev.commands.xprop.enable = false;
 
     # Langage support
     components.dev.langage.c.enable = true;
