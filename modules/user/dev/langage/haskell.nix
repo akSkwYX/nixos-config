@@ -2,6 +2,6 @@
 {
   home.packages = lib.mkIf config.components.dev.langage.haskell.enable [
     pkgs.ghc
-    pkgs.haskellPackages.hls
+    pkgs.haskell-language-server
   ];
 }

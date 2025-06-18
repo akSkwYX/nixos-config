@@ -3,6 +3,7 @@
   imports = [
     ./1password.nix
     ./fonts.nix
+    ./grub.nix
   ];
 
   environment.systemPackages = with pkgs; [
