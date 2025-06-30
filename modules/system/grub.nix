@@ -1,25 +1,24 @@
 { config, pkgs, lib, ... }:
+let
+  grubTheme = pkgs.stdenv.mkDerivation {
+    pname = "skwyx-grub-theme";
+    version = "1";
+    src = pkgs.fetchFromGitHub {
+      owner = "akSkwYX";
+      repo = "grub-theme";
+      rev = "52d1cd07b1de3382e393395c8c7c1f89e318a334";
+      hash = "sha256-7dJ8rvukaPPviUbxgawAB7EICNzHkU4IW5kdrXkudpo=";
+    };
+    installPhase = "cp -r . $out";
+  };
+in
 {
-  fileSystems."/boot" = {
-    device = "/dev/nvme0n1p1";
-    fsType = "vfat";
-  };
-
-  fileSystems."/" = {
-    device = "/dev/nvme0n1p2";
-    fsType = "ext4";
-  };
-
-  swapDevices =  [
-    { device = "/dev/nvme0n1p3"; }
-  ];
-
   boot.loader.grub = {
     enable = true;
-    version = 2;
     efiSupport = true;
     efiInstallAsRemovable = true;
     device = "nodev";
+    theme = grubTheme;
   };
 
   boot.loader.efi.efiSysMountPoint = "/boot";

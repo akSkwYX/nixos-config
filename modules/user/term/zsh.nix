@@ -28,7 +28,7 @@
     };
 
     initContent = ''
-      hyprtest() {
+      config_test() {
         if [ $# -eq 0 ]; then
           echo "Usage: hyprtest <command> [args…]" >&2
           return 1
