@@ -1,97 +1,142 @@
-# NixOS configuration
+## NixOS Configuration
 
-## What is this ?
+This repository contains my personal NixOS configuration, which you can use as a template or starting point for your own setup.
 
-This git repository contains my NixOS configuration files.
+## Overview
 
-## How to use ?
+* **Purpose**: Provide a reusable, modular NixOS configuration that can be adapted for different machines and user environments.
+* **Hosts**: Three predefined configurations:
 
-You can use it as a premade configuration or as an example to do yours.
+  * **light**: Minimal, non-graphical setup (for headless or server environments).
+  * **medium**: Basic graphical desktop (ideal for laptops).
+  * **large**: Full-featured desktop (for workstations or gaming PCs).
 
-## Installation :
+## Prerequisites
 
-Install NixOS following the wiki instruction : [NixOS manual](https://nixos.org/manual/nixos/stable/#sec-installation)\
-Change configuration.nix file to enable git\
-`git clone` this repository where you want to store the config folder\
-Replace `hosts/hardware-configuration.nix` by yours\
-Finally rebuild with\
-`sudo nixos-rebuild switch --flake path_to_the_config_folder#system_you_want`
+1. Install NixOS following the official manual: [NixOS Installation Guide](https://nixos.org/manual/nixos/stable/#sec-installation).
+2. Ensure your `configuration.nix` enables Git support.
 
-This configuration provide 3 differents hosts (currently only medium):
+## Getting Started
 
-- light : no graphical interface, just what you need to code
+1. Clone this repository to your preferred location:
 
-- medium : basic graphical interface, intended for laptop usage
+   ```bash
+   git clone https://github.com/akSkwYX/nixos-config.git <path-to-config>
+   ```
+2. Replace `hardware-configuration.nix` in the `hosts/` directory with your own hardware configuration:
 
-- large : full configuration, intended for pc usage
+   ```bash
+   mv <your-hardware-config> hosts/hardware-configuration.nix
+   ```
+3. Apply the desired host configuration:
 
-## User managment
+   ```bash
+   sudo nixos-rebuild switch --flake <path-to-config>#<host>
+   ```
 
-Users are handled in `users`
+   Replace `<host>` with `light`, `medium`, or `large`.
 
-### Add a user
-Create a new folder `users/newuser`.\
-Copy `users/skwyx/home.nix` and `users/skwyx/user.nix` files under this new folder.\
-Add this line to `users/user_declaration.nix` :\
-`users.newuser.enable = lib.mkEnableOption "Enable newuser";`\
-And this one to `users/user_activation.nix` in `imports` :\
-`./newuser/user.nix`\
+## User Management
 
-To enable it you can now add it in the hosts file you use, for exemple `hosts/medium.nix` :
-```
+All user definitions are located in the `users/` directory.
+
+### Adding a New User
+
+1. Create a folder for the new user:
+
+   ```bash
+   mkdir users/<newuser>
+   ```
+2. Copy the template files:
+
+   ```bash
+   cp users/skwyx/home.nix users/skwyx/user.nix users/<newuser>/
+   ```
+3. In `users/user_declaration.nix`, add:
+
+   ```nix
+   users.<newuser>.enable = lib.mkEnableOption "Enable <newuser>";
+   ```
+4. In `users/user_activation.nix`, add the new user import:
+
+   ```nix
+   imports = [
+     ./<newuser>/user.nix
+   ];
+   ```
+5. Enable the user in your host file (e.g., `hosts/medium.nix`):
+
+   ```nix
+   users = {
+     <newuser>.enable = true;
+   };
+   ```
+6. Customize `users/<newuser>/user.nix` (shell, groups, permissions) and `users/<newuser>/home.nix` (home-environment options, username, home directory).
+
+### Removing a User
+
+Disable the user in your host configuration:
+
+```nix
 users = {
-    newuser.enable = true;
+  <user>.enable = false;
 };
 ```
 
-To change the user configuration go back to `users/newuser` and modify `home.nix` and `user.nix`\
-In `user.nix` you will modify permissions and shell that the user will have and his groups.\
-In `home.nix` you will modify components for the user (i.e. app and tools), username and home directory
+## Modules and Packages
 
-### Remove a user
-Simply disable it by turning it off in `hosts/system_you_use.nix` in `users = { user.enable = false }`
+System-wide and user-specific modules are located within the `modules/` directory:
 
-## Modifying, Adding, Removing contents
+* **System modules**: `modules/system/*` (services, system packages)
+* **User modules**: `modules/user/*` (user applications, tools)
 
-You should only need to change `modules` folder to modify or add packages.\
-If it's a package which is used system wide, or need to be at system level, then modify `modules/system`.\
-It it's user level, then modify `modules/user`\
-Keep in mind that if you want to keep the components system you will need to modify `components.nix` files and add your new components to activation files like in `users/youruser/home.nix`
+To add or remove functionality, modify the relevant module and update `components.nix` and activation files (e.g., in `users/<user>/home.nix`).
 
-You should not need to remove any configuration piece thanks to the components system, just disbale it in your components activation and it's done.
+## Managing Dotfiles
 
-### Dotfiles
+This configuration supports multiple dotfile management strategies:
 
-To handle dotfiles I use flakes so the dotfiles are mine and if you don't want to use it you will need to modify more things.\
-There is many means to handle dotfiles with NixOS.\
-I will cover the one I know but I can miss some.\
+### 1. Flakes-based Dotfiles (Recommended)
 
-### Using flakes
-That's what i'm using currently and it's the best way to me.\
-So if you want to change the flake you use for your dotfiles.\
-First go in `flake.nix` and change the url for the one you want for instance :\
-`nvim-dotfiles.url = "github:akSkwYX/neovim-dotfiles";`\
-become\
-`nvim-dotfiles.url = "github:BestUser/neovim-flake";`\
-Then, go where you import this flake (by default for neovim it's in `users/home.nix`) and replace the import line by what's indicated in the new dotfiles repository.\
-Rebuild and your configuration should have changed (maybe you will need to update flakes by doing nix flake update --flake path_to_flake)
+1. Edit `flake.nix` to point to your dotfile repository:
 
-### Using home-manager
-Remove flakes entirely (see precedent section but supress instead of modify)\
-Then in your user folder add a file for your configuration (or a folder if you want to split your configuration)\
-Put your configuration in it and import it from `users/youruser/home.nix`\
-Rebuild and you are done
+   ```nix
+   nvim-dotfiles.url = "github:YourUser/your-dotfiles-repo";
+   ```
+2. Update the import location in your user configuration (e.g., `users/<user>/home.nix`).
+3. Rebuild your system and update flakes:
 
-### Using non-declarative dotfiles
-This should not be used\
-First, suppress flake usage\
-Don't forget to install the package somwhere (you probably want it to be in your user configuration)\
-Put your dotfiles in `.config/`
+   ```bash
+   nix flake update --flake .
+   sudo nixos-rebuild switch --flake .#<host>
+   ```
+
+### 2. Home Manager
+
+1. Remove flakes configurations.
+2. Add your Home Manager configuration under `users/<user>/home.nix` (or split across multiple files).
+3. Import your Home Manager files accordingly and rebuild.
+
+### 3. Non-declarative Dotfiles
+
+*Not recommended.*
+
+1. Disable flakes usage.
+2. Ensure required packages are installed via Nix.
+3. Place your dotfiles in `~/.config/` manually.
 
 ## TODO
 
-- Testing
-    - Deactivation of a once activated package
-    - Installation
-- Modules
-    - Add more modules with premade configuration
+* **Testing**
+
+  * Deactivate a previously enabled component
+  * Verify the installation workflow end-to-end
+
+* **Modules**
+
+  * Add more modules with preconfigured settings
+
+---
+
+*Feel free to open an issue or submit a pull request for suggestions and improvements!*
+ NixOS configuration
