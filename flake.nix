@@ -2,20 +2,24 @@
 	description = "Laptop NixOS configuration";
 
 	inputs = {
-		nixpkgs.url = "github:NixOS/nixpkgs/release-26.05";
+		agenix.url = "github:ryantm/agenix";
+
+		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
 		home-manager = {
-			url = "github:nix-community/home-manager/release-26.05";
+			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+	outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
 		nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			specialArgs = { inherit inputs; };
 			modules = [
 				./hosts/laptop/configuration.nix
+
+				agenix.nixosModules.default
 
 				home-manager.nixosModules.home-manager {
 					home-manager.useGlobalPkgs = true;

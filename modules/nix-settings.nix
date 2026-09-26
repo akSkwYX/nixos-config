@@ -24,6 +24,15 @@
 
   console.keyMap = "fr";
 
+	services.libinput = {
+		enable = true;
+		touchpad = {
+			tapping = true;
+			naturalScrolling = true;
+			disableWhileTyping = true;
+		};
+	};
+
   nixpkgs.config.allowUnfree = true;
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -38,5 +47,9 @@
 
   environment.systemPackages = with pkgs; [
      neovim
+		 openssh
+     man
+     man-pages
+     man-pages-posix
   ];
 }

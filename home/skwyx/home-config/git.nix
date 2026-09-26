@@ -2,15 +2,11 @@
 {
 	programs.git = {
 		enable = true;
-		includes = [
-			{
-				contents = {
-					user = {
-						email = "akskwyx@gmail.com";
-						name = "akSkwYX";
-					};
-				};
-			}
-		];
+		settings = {
+			user = {
+				email = "akskwyx@gmail.com";
+				name = "akSkwYX";
+			};
+		};
 	};
 }
