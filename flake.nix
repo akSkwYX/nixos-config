@@ -2,9 +2,14 @@
 	description = "Laptop NixOS configuration";
 
 	inputs = {
+		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
 		agenix.url = "github:ryantm/agenix";
 
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
 		home-manager = {
 			url = "github:nix-community/home-manager";
@@ -12,7 +17,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs: {
+	outputs = { self, nixpkgs, home-manager, agenix, silentSDDM, ... }@inputs: {
 		nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			specialArgs = { inherit inputs; };

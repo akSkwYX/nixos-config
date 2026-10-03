@@ -45,6 +45,11 @@
 
 	nix.optimise.automatic = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   environment.systemPackages = with pkgs; [
      neovim
 		 openssh

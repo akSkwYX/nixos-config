@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 	imports = [
+    inputs.silentSDDM.nixosModules.default
 		../home/skwyx/skwyx-config.nix
 	];
 
@@ -12,10 +13,15 @@
     packages = with pkgs; [];
   };
 
-  services.displayManager.sddm = {
-		enable = true;
-		autoNumlock = true;
-		wayland.enable = true;
-	};
-	services.displayManager.defaultSession = "niri";
+  systemd.tmpfiles.rules = let
+    user = "skwyx";
+    iconPath = "/home/skwyx/.config/pp/current";
+  in [
+    "f+ /var/lib/AccountsService/users/${user} 0600 root root -  [User]\\nIcon=/var/lib/AccountsService/icons/${user}\\n"
+    "L+ /var/lib/AccountsService/icons/${user} -    -    -    -  ${iconPath}"
+  ];
+  programs.silentSDDM = {
+    enable = true;
+    theme = "default";
+  };
 }

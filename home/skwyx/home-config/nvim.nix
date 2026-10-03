@@ -3,6 +3,7 @@
   home.packages = [
     pkgs.gcc
     pkgs.cmake
+    pkgs.tree-sitter
   ];
 
 	home.file = {

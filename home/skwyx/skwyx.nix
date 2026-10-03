@@ -11,9 +11,12 @@
 		./home-config/keepassxc.nix
 		./home-config/nvim.nix
     ./home-config/shell.nix
-    ./home-config/dev/languages.nix
     ./home-config/apps/apps.nix
+    ./home-config/tools.nix
 	];
+
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
 	home.username = "skwyx";
 	home.homeDirectory = "/home/skwyx";

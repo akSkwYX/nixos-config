@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    typst
-    gnumake
-    gcc
+    zip
+    unzip
+    tree
   ];
 }
