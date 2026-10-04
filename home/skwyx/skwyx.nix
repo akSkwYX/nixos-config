@@ -13,6 +13,7 @@
     ./home-config/shell.nix
     ./home-config/apps/apps.nix
     ./home-config/tools.nix
+    ./home-config/quickshell.nix
 	];
 
   programs.direnv.enable = true;
