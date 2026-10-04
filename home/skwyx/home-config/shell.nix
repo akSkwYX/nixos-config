@@ -38,7 +38,7 @@
     '';
 
     shellAliases = {
-      "nr" = "nixos-rebuild switch --sudo --flake=/home/skwyx/.nixos-config#laptop";
+      "nr" = "nixos-rebuild switch --sudo --flake=/home/skwyx/.nixos-config";
       "ls" = "eza --icons --git --group-directories-first";
       "ll" = "eza --icons --git -l --group-directories-first";
       "la" = "eza --icons --git -la --group-directories-first";
