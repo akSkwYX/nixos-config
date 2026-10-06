@@ -1,59 +1,5 @@
 { config, pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    blesh
-    bash-completion
-    ripgrep
-    fd
-    eza
-    bat
-  ];
-
-  programs.readline = {
-    enable = true;
-    extraConfig = ''
-      set completion-ignore-case on
-      set show-all-if-ambiguous on
-      set menu-complete-display-prefix on
-      set colored-stats on
-
-      "\e[A": history-search-backward
-      "\e[B": history-search-forward
-    '';
-  };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-
-    historyControl = [ "erasedups" "ignoredups" "ignorespace" ];
-    historyIgnore = [ "ls" "cd" "exit" "clear"];
-
-    initExtra = ''
-      PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
-
-      if [[ $- == *i* ]]; then
-        source ${pkgs.blesh}/share/blesh/ble.sh
-      fi
-    '';
-
-    shellAliases = {
-      "nr" = "nixos-rebuild switch --sudo --flake=/home/skwyx/.nixos-config";
-      "ls" = "eza --icons --git --group-directories-first";
-      "ll" = "eza --icons --git -l --group-directories-first";
-      "la" = "eza --icons --git -la --group-directories-first";
-      "cat" = "bat --style=plain";
-    };
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    defaultCommand = "fd --type f --strip-cwd-prefix --hidden --exclude .git";
-    fileWidget.command = "fd --type f --strip-cwd-prefix --hidden --exclude .git";
-    changeDirWidget.command = "fd --type d --strip-cwd-prefix --hidden --exclude .git";
-  };
-
   programs.starship = {
     enable = true;
     enableBashIntegration = true;

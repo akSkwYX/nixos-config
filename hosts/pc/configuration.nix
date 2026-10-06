@@ -4,12 +4,15 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../../modules/features.nix
       ../../modules/boot.nix
       ../../modules/networking.nix
       ../../modules/nix-settings.nix
 			../../modules/agenix.nix
       ../../modules/users.nix
     ];
+
+  my.gameDev.enable = true;
 
   system.stateVersion = "26.05";
 }

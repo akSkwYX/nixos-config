@@ -1,10 +1,11 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./niri.nix
+    ./quickshell.nix
+  ];
+
   home.packages = with pkgs; [
-    evince
-    anki
-    typst
     swaybg
-    swayimg
   ];
 }
