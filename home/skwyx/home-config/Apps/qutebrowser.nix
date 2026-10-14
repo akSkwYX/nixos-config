@@ -4,6 +4,7 @@
     pkgs.qutebrowser 
     pkgs.python314Packages.adblock
     pkgs.mpv
+    pkgs.yt-dlp
   ];
 
   home.file = {
