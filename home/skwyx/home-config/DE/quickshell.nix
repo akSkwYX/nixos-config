@@ -2,6 +2,7 @@
 {
   home.packages = [
     pkgs.quickshell
+    pkgs.libnotify
   ];
 
   home.file = {
