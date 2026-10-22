@@ -4,6 +4,7 @@
     pkgs.gcc
     pkgs.cmake
     pkgs.tree-sitter
+    pkgs.lua5_5
   ];
 
 	home.file = {

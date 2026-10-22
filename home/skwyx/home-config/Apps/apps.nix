@@ -12,5 +12,6 @@
     anki
     typst
     swayimg
+    deezer-desktop
   ];
 }
